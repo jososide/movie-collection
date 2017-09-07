@@ -112,14 +112,31 @@ describe('Movie Tests', function() {
 
   // The following left blank on purpose. They must be implemented.
   describe('Update', function() {
-    it('Should update a movie', function() {
-
+    it('Should update a movie', function(done)
+       const updatedMovie = {
+    imagePoster: '',
+    title: 'Testing Title 1',
+    genre: 'Testing Genre 1',
+    rating: '8',
+    actors: 'Steve Martin, Collin Ferral, Leo Decaprio',
+    year: '2018'
+  }
+       {
+      chai.request(server).post('/movie/${movie._id}').set('Authorization', user.token).send(updatedMovie).end(function (err, res) {
+        assert.equal(err, undefined)
+        assert.eqaul(res.body.sucess, true)
+        res.should.have.status(200);
+        res.body.movie.should.have.property('movie');
+        done();
     });
   });
 
   describe('Delete', function() {
-    it('Should remove the created user', function() {
-
+    it('Should remove the created user', function(done) {
+      chai.request(server).delete('/movie/${movie._id}').set('Authorization', user.token).send()
+         assert.eqaul(res.body.sucess, true)
+         res.should.have.status(200);
+         done();
     });
   });
 
